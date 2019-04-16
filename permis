@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo chown -R www-data:www-data source
+sudo chmod -R 755 source
