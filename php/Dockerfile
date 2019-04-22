@@ -25,7 +25,7 @@ ENV PHPIZE_DEPS \
 # persistent / runtime deps
 RUN apt-get update && apt-get install -y \
 		$PHPIZE_DEPS \
-		ca-certificates \
+		ca-certificates \docker ps -as
 		curl \
 		xz-utils \
         cron \
@@ -67,6 +67,7 @@ ENV PHP_CPPFLAGS="$PHP_CFLAGS"
 ENV PHP_LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"
 
 ENV GPG_KEYS A917B1ECDA84AEC2B568FED6F50ABC807BD5DCD0 528995BFEDFBA7191D46839EF9BA0ADA31CBD89E 1729F83938DA44E27BA0F4D3DBDB397470D12172
+ENV SERVER_LIST ha.pool.sks-keyservers.net hkp://p80.pool.sks-keyservers.net:80 keyserver.ubuntu.com hkp://keyserver.ubuntu.com:80 pgp.mit.edu
 
 ENV PHP_VERSION 7.1.28
 ENV PHP_URL="https://www.php.net/get/php-7.1.28.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-7.1.28.tar.xz.asc/from/this/mirror"
@@ -103,7 +104,9 @@ RUN set -xe; \
 		wget -O php.tar.xz.asc "$PHP_ASC_URL"; \
 		export GNUPGHOME="$(mktemp -d)"; \
 		for key in $GPG_KEYS; do \
-			gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+		    for server in $SERVER_LIST; do \
+                gpg --batch --keyserver "$server" --keyserver-options timeout=10  --recv-keys "$key" && found=yes && break || echo "Trying new server..."; \
+            done; \
 		done; \
 		gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 		command -v gpgconf > /dev/null && gpgconf --kill all; \
