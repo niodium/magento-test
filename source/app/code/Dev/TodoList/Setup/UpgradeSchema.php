@@ -13,7 +13,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         $installer->startSetup();
 
-        if(version_compare($context->getVersion(), '1.1.0', '<')) {
+        if(version_compare($context->getVersion(), '1.0.0', '<')) {
             if (!$installer->tableExists('todo_table')) {
                 $table = $installer->getConnection()->newTable(
                     $installer->getTable('todo_table')

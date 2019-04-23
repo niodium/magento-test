@@ -3,11 +3,11 @@
       layout="1column"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="Dev_TodoList::css/todo.css"/>
+        <css src="LearnMagento_ToDoList::css/todo.css"/>
     </head>
     <referenceBlock name="content">
         <block template="content.phtml"
-               class="Dev_TodoList\TodoList\Block\Main"
+               class="LearnMagento\ToDoList\Block\Main"
                name="learnmagento_todolist_block_main"/>
     </referenceBlock>
 </page>

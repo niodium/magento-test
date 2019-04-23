@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Dev_TodoList::todo_list"
+             resource="Dev_TodoList::todo_list"
+             title="TODO Menu"
+             module="Dev_TodoList" sortOrder="10"/>
+        <add id="Dev_TodoList::todo_items"
+             title="Items"
+             module="Dev_TodoList"
+             sortOrder="9999"
+             resource="Dev_TodoList::todo_list"
+             parent="Dev_TodoList::todo_list"
+             action="todolist/item/index"/>
+    </menu>
+</config>
