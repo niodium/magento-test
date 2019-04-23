@@ -7,8 +7,8 @@
     </head>
     <referenceBlock name="content">
         <block template="content.phtml"
-               class="Dev_TodoList\TodoList\Block\Main"
-               name="learnmagento_todolist_block_main"/>
+               class="Dev\TodoList\Block\Main"
+               name="dev_todolist_block_main"/>
     </referenceBlock>
 </page>
 

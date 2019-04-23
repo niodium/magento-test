@@ -5,11 +5,11 @@
         <add id="Dev_TodoList::todo_list"
              resource="Dev_TodoList::todo_list"
              title="TODO Menu"
-             module="Dev_TodoList" sortOrder="10"/>
+             module="Dev_TodoList" sortOrder="15"/>
         <add id="Dev_TodoList::todo_items"
-             title="Items"
+             title="TODO Manager"
              module="Dev_TodoList"
-             sortOrder="9999"
+             sortOrder="10"
              resource="Dev_TodoList::todo_list"
              parent="Dev_TodoList::todo_list"
              action="todolist/item/index"/>

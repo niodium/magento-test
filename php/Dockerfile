@@ -25,7 +25,7 @@ ENV PHPIZE_DEPS \
 # persistent / runtime deps
 RUN apt-get update && apt-get install -y \
 		$PHPIZE_DEPS \
-		ca-certificates \docker ps -as
+		ca-certificates \
 		curl \
 		xz-utils \
         cron \

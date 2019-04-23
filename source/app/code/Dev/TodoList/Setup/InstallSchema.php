@@ -10,6 +10,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
     {
         $installer = $setup;
         $installer->startSetup();
+
         if (!$installer->tableExists('todo_table')) {
             $table = $installer->getConnection()->newTable(
                 $installer->getTable('todo_table')
@@ -34,24 +35,42 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     'todo action'
                 )
                 ->addColumn(
-                    'dt',
-                    Table::TYPE_TIMESTAMP,
+                    'date_completed',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_DATETIME,
+                    null,
+                    ['nullable' => true,],
+                    'Date the item was completed'
+                )
+                ->addColumn(
+                    'creation_time',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                     null,
                     [
                         'nullable' => false,
-                        'default' => Table::TIMESTAMP_INIT
+                        'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT
                     ],
-                    'created at'
+                    'Creation Time'
+                )
+                ->addColumn(
+                    'update_time',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                    null,
+                    [
+                        'nullable' => false,
+                        'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE
+                    ],
+                    'Modification Time'
                 )
                 ->addColumn(
                     'is_active',
-                    Table::TYPE_SMALLINT,
+                    \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
                     null,
                     [
                         'nullable' => false,
-                        'default' => 1
+                        'default' => '1'
                     ],
-                    'active status')
+                    'Is Active'
+                )
                 ->setComment('TODO Table');
             $installer->getConnection()->createTable($table);
         }
